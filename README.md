@@ -2,7 +2,7 @@
 
 ShinyJWAS is a shiny web application to help users to perform whole-genome Bayesian regression analysis with JWAS package, a well-documented software platform based on Julia and the interactive Jupyter notebook for analyses of general univariate and multivariate Bayesian mixed effects models.  With the easy-to-use graphical user interface (GUI), ShinyJWAS provides users a complete tutorial to the JWAS package for Bayesian analysis and a number of options to manage, explore, and visualize the data. The application provides interactive interfaces to generate scripts to run Bayesian analysis in JWAS, visualize phenotypic data, pedigree structure, and posterior distributions of parameters of interest, e.g., heritability, make Manhattan plot from GWAS, and perform convergence diagnosis of MCMC samples.
 
-In conclusion, functions in ShinyJWAS free users from scripting by automating the Bayesian analysis process and provide interactive interfaces for data summarization, visualization, and diagnostic tests. More detailed documentation and tutorials can be found on the shiny app page: https://zigwang.shinyapps.io/shiny_app/
+In conclusion, functions in ShinyJWAS free users from scripting by automating the Bayesian analysis process and provide interactive interfaces for data summarization, visualization, and diagnostic tests. More detailed documentation and tutorials can be found on the shiny app page: https://github.com/QTL-rocks/ShinyJWAS
 
 ### General Guide
 This application is implemented entirely in R and consists of one information panel and seven functional panels: (1) Julia Scripts, (2) Phenotype, (3) Pedigree, (4) Venn Diagram, (5) Manhattan Plot, (6) Convergence Diagnosis, and (7) Posterior Distribution.
@@ -39,7 +39,7 @@ This section aims to visualize the posterior distribution of model parameters (e
 
 ---------------
 #### Usage of this application
-The application is hosted on Shinyapps.io here: https://zigwang.shinyapps.io/shiny_app/ . Users can also run ShinyJWAS locally by running _shiny::runGitHub("ShinyJWAS", "QTL-rocks",subdir = "shiny_app")_ in R studio 
+The application is hosted on Shinyapps.io here: https://github.com/QTL-rocks/ShinyJWAS . Users can also run ShinyJWAS locally by running _shiny::runGitHub("ShinyJWAS", "QTL-rocks",subdir = "shiny_app")_ in R studio 
 
 ---------------
 #### Contact
