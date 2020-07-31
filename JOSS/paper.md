@@ -16,7 +16,8 @@ affiliations:
  - name: Department of Animal Science, University of California Davis
    index: 1
 
- - name: Integrative Genetics and Genomics Graduate Group, University of California Davis   index: 2
+ - name: Integrative Genetics and Genomics Graduate Group, University of California Davis       
+   index: 2
 
 date: 31 July 2020
 bibliography: paper.bib
