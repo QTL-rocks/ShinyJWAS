@@ -7,7 +7,7 @@ In conclusion, functions in ShinyJWAS free users from scripting by automating th
 ### General Guide
 This application is implemented entirely in R and consists of one information panel and seven functional panels: (1) Julia Scripts, (2) Phenotype, (3) Pedigree, (4) Venn Diagram, (5) Manhattan Plot, (6) Convergence Diagnosis, and (7) Posterior Distribution.
 
-The application accepts comma-separated values (CSV) files. For each panel, a step-by-step introduction is provided by clicking the _Help_ button on the upper right of web page. Users can also check the example output based on the example data that can be downloaded by clicking the _Download Sample Data_ button on the upper right corner of the sidebar panel. All source code and example data can also be downloaded from the link: https://github.com/justinwang97/jwas_shiny. The general introduction to all seven functional panels is given below.
+The application accepts comma-separated values (CSV) files. For each panel, a step-by-step introduction is provided by clicking the _Help_ button on the upper right of web page. Users can also check the example output based on the example data that can be downloaded by clicking the _Download Sample Data_ button on the upper right corner of the sidebar panel. All source code and example data can also be downloaded from the link: https://github.com/QTL-rocks/ShinyJWAS. The general introduction to all seven functional panels is given below.
 
 ---------------
 #### Julia Scripts Section
