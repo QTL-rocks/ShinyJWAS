@@ -9,7 +9,7 @@ authors:
     #orcid: 0000-0003-0872-7098
     affiliation: 1 # (Multiple affiliations must be quoted)
   - name: Tianjing Zhao
-    affiliation: “1，2”
+    affiliation: "1, 2"
   - name: Hao Cheng
     affiliation: 1
 affiliations:
