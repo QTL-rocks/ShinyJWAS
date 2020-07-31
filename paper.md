@@ -6,7 +6,7 @@ tags:
 
 authors:
   - name: Zigui Wang
-    orcid: 0000-0003-0872-7098
+    #orcid: 0000-0003-0872-7098
     affiliation: 1 # (Multiple affiliations must be quoted)
   - name: Tianjing Zhao
     affiliation: 1
