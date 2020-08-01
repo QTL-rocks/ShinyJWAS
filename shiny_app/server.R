@@ -360,7 +360,7 @@ observeEvent(input$jwas_output_plot_indicate, {
 observeEvent(input$jwas_output_example, {
   
   output$jwas_output_plot<- renderPlot({
-    cov_data <- read.csv(paste0(volumes["Example"],"/output_plot_sample.txt"))
+    cov_data <- read.csv(paste0(volumes["Example"],"/MCMC_samples_residual_variance.txt"))
     paramter_name = colnames(cov_data)  # vector of parameter
     
     
