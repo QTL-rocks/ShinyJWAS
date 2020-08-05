@@ -44,13 +44,13 @@ observeEvent(input$help,{
                                                 "#eighth_phenotype_index_button",
                                                 "#eighth_plot_button"
                                                 ),
-                                    intro = c("The sample data for phenotype can be download here",
-                                              "Click this button to show the phenotype plot of sample data",
-                                              "Upload the the phenotype data here, please noticed that this app at most can handle the 4 traits,
+                                    intro = c("Click this button to download the example data, which includes 4 phenotype in the example output.",
+                                              "Click this button to show the example phenotype plot based on the example data.",
+                                              "Upload the phenotype data to generate your phenotype plot. Please noticed that this app at most can handle the 4 traits,
                                               the data more than 4 traits will be ignored. ",
-                                              "Pick the phenotype used in the plot, th first 4 phenotype in uploaded data will be used 
+                                              "Choose the phenotype used in the plot by write the phenotype name and separate by \",\" , the first 4 phenotype in uploaded data will be used 
                                               if there is no input",
-                                              " Click this button to generate the phenotype plot"
+                                              "Click this button to generate the phenotype plot"
                                               )))
                )
              } else if (str_contains(input$tabs,"Posterior Distribution")) {
@@ -60,13 +60,10 @@ observeEvent(input$help,{
                                                 "#second_file_input_button",
                                                 "#second_plot_button"
                  ),
-                 intro = c("The sample data can be download here",
-                           "Click this button will show the pedigree plot of the sample data",
-                           "Upload the pedigree data. The first three columns must be individual, sire, and dam IDs. 
-                           Missing data can be denoted as \"0\",\"*\",\"NA\",or NA, but rows with missing individual
-                           will be deleted from the data set.
-                            More detailed can be found in the information section.",
-                           "Click this button to generate the histogram plot."
+                 intro = c("Click this button to download the example data, which includes the MCMC sample of residual covariance among 4 traits.",
+                           "Click this button will show the distribution plot of the example data.",
+                           "Upload the MCMC sample data here. The MCMC sample file from JWAS package is recommended.",
+                           "Click this button to generate the histogram plot for MCMC samples."
                  )))
                )
              } else if (str_contains(input$tabs,"Pedigree")) {
@@ -77,8 +74,8 @@ observeEvent(input$help,{
                                                 "#third_candidate_animal",
                                                 "#third_plot_button"
                  ),
-                 intro = c("The sample data can be download here",
-                           "Click this button will show the pedigree plot of the sample data",
+                 intro = c("Click this button to download the example pedigree data that from the visPedigree package.",
+                           "Click this button will show the pedigree plot of the example data",
                            "Upload the pedigree data. The first three columns must be individual, sire, and dam IDs. 
                            Missing data can be denoted as \"0\",\"*\",\"NA\",or NA, but rows with missing individual
                            will be deleted from the data set.
@@ -97,8 +94,9 @@ observeEvent(input$help,{
                                                 "#fourth_file_pedigree_input",
                                                 "#fourth_plot_button"
                  ),
-                 intro = c("The sample data can be download here",
-                           "Click this button will show the venn diagram of the sample data",
+                 intro = c("Click this button to download the example Venn Diagram data, which includes three files corresponding to individual ID included in the phenotype data,
+                           genotype data, and pedigree data.",
+                           "Click this button to show the venn diagram based on the example data",
                            "Upload the ID file for individuals included in the phenotype data.",
                            "Upload the ID file for individuals included in the genotype data.",
                            "Upload the ID file for individuals included in the pedigree data.",
@@ -125,19 +123,18 @@ observeEvent(input$help,{
                                                 "#fifth_other_parameters"
                  ),
                  intro = c(
-                           "The sample data can be download here",
-                           "The user needs to input all the variables included in the model. The name of the traits and variables 
-                           need to match the header of the uploading file. Also, the variance-covariance matrix for residual and 
-                           random effect is also needed.",
+                           "Click this button to download the example data, which consists of example phenotype data, example genotype data and example pedigree data.",
+                           "Input all the variables included in the model here. The name of the traits and variables 
+                           need to match the header of the uploading file.",
                            "Click this button to show the step 1 example input for multiple trait model.",
                            "Click this button to show the step 1 example input for single trait model.",
                            "Input the number of traits you want to inlcude in the model, minimum is 1, the maximum is 100.",
                            "Input the name of traits, fixed effects, random effects, and genotype included in the model.",
                            "Input the number of genotype used in the model",
-                           "Please write the genotype variable name, the method you want to use,
+                           "Please write the genotype variable name, the method you want to use for this genoytpe,
                            and the local path for the genotype data",
                            
-                           "Once the model is built, the user needs to set the parameter for running the model, like the MCMC chain length, 
+                           "Once the model is built, set the parameter for running the model here, like the MCMC chain length, 
                            output frequency. The details can be found in the following help or Information section.",
                            "Click this button to show the example input for step 2.",
                            "Input the length of MCMC chain here.",
@@ -166,11 +163,11 @@ observeEvent(input$help,{
                                                 "#sixth_plot_button"
                  ),
                  intro = c(
-                           "The sample data for Manhattan plot can be download here.",
-                           "Click this button to show the Manhattan plot of sample data.",
-                           "Upload the data file for Manhattan plot here, the default format will be the same as the GWAS output
+                           "Click this button to download the example data, which consists of example GWAS result file and example map file.",
+                           "Click this button to show the Manhattan plot based on the example data.",
+                           "Upload the GWAS result file for Manhattan plot here, the default format will be the same as the GWAS output
                            file from JWAS package.",
-                           "Since the default manhattan plot data file does not contain the chromosome and posision information, uploading the map file 
+                           "Since the default manhattan plot data file does not contain the chromosome and posision information,the map file 
                            is required. For window based data, the chromosome and position for the genomic window will be decided by its first SNP.",
                            "Click this button if the header in the file are parameter name.",
                            "Pick the column used for the y axis in the Manhattan plot, the default will be \"WPPA\" ",
@@ -191,11 +188,11 @@ observeEvent(input$help,{
                                                 "#seventh_plot_button"
                  ),
                  intro = c(
-                           "The sample data for convergence diagnosis can be download here.",
-                           "Click this button to run the convergence diagnosis on the sample data.",
-                           "Input number of chains you want to use to do the convergence diagnosis.",
+                           "Click this button to download the example data.",
+                           "Click this button to show the convergence diagnosis result of the sample data.",
+                           "Input number of chains you want to use for the convergence diagnosis.",
                            "Upload the files for each MCMC chain.",
-                           "Click this button to do the convergence diagnosis."
+                           "Click this button to do the convergence diagnosis on the uploading data."
                           
                            
                  )))
@@ -445,7 +442,7 @@ output$Venn_Data <- downloadHandler(
       paste("ID_", "sample.zip", sep="")
     },
     content = function(file) {
-      file.copy(paste0(volumes["Example"],"/ID.zip"), file)
+      file.copy(paste0(volumes["Example"],"/ID_sample.zip"), file)
     }
   )
  
@@ -1022,10 +1019,10 @@ output$Venn_Data <- downloadHandler(
   #sample data for manhattan plot (window based)
   output$manhattan_Data <- downloadHandler(
     filename = function() { 
-      paste("Manhattan", "_sample", ".csv", sep="")
+      paste("manhattan", "_example", ".zip", sep="")
     },
     content = function(file) {
-      file.copy(paste0(volumes["Example"],"/Manhattan_sample.csv"), file)
+      file.copy(paste0(volumes["Example"],"/manhattan_example.zip"), file)
     })
   
   
