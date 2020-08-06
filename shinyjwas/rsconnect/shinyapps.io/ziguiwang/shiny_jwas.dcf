@@ -1,0 +1,10 @@
+name: shiny_jwas
+title:
+username:
+account: ziguiwang
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2645524
+bundleId: 3480801
+url: https://ziguiwang.shinyapps.io/shiny_jwas/
+when: 1596686113.47766

@@ -1,0 +1,10 @@
+name: shinyjwas
+title:
+username:
+account: qtl-rocks
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2646679
+bundleId: 3482661
+url: https://qtl-rocks.shinyapps.io/shinyjwas/
+when: 1596725046.47569
