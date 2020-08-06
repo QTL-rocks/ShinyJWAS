@@ -39,7 +39,7 @@ This section aims to visualize the posterior distribution of model parameters (e
 
 ---------------
 #### Usage of this application
-The application is hosted on Shinyapps.io here: https://github.com/QTL-rocks/ShinyJWAS . Users can also run ShinyJWAS locally by running _shiny::runGitHub("ShinyJWAS", "QTL-rocks",subdir = "shiny_app")_ in R studio 
+The application is hosted on Shinyapps.io here: https://qtl-rocks.shinyapps.io/shinyjwas/ . Users can also run ShinyJWAS locally by running _shiny::runGitHub("ShinyJWAS", "QTL-rocks",subdir = "shiny_app")_ in R studio 
 
 ---------------
 #### Contact
