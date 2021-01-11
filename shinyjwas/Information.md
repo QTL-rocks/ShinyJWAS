@@ -3,6 +3,7 @@ This application is implemented entirely in R and consists of one information pa
 
 The application accepts comma-separated values (CSV) files. For each panel, a step-by-step introduction is provided by clicking the _Help_ button on the upper right of web page. Users can also check the example output based on the example data that can be downloaded by clicking the _Download Sample Data_ button on the upper right corner of the sidebar panel. All source code and example data can also be downloaded from the link: https://github.com/QTL-rocks/ShinyJWAS. The general introduction to all seven functional panels is given below.
 
+#### Important Note: given the time limit of the online server, for users who want to use ShinyJWAS for a lone time, we highly recommend using runGitHub("ShinyJWAS","QTL-rocks",subdir = "shinyjwas") to run the shiny app locally.
 ---------------
 #### Julia Scripts Section
 This section helps to generate a Julia script to run Bayesian analysis using the package JWAS. Users can define their models and several parameters in JWAS using the interactive interface.
