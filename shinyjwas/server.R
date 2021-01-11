@@ -3,11 +3,10 @@
 options(shiny.maxRequestSize = 10 * 1024 ^ 2)
 
 # Load demo data from 'bnlearn'
-data(learning.test, package = "bnlearn")
-data(gaussian.test, package = "bnlearn")
-data(insurance, package = "bnlearn")
+#data(learning.test, package = "bnlearn")
+#data(gaussian.test, package = "bnlearn")
+#data(insurance, package = "bnlearn")
 
-#' @import bnlearn
 #' @import shiny
 #' @import shinydashboard
 # Define required server logic
