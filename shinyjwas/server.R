@@ -1003,6 +1003,83 @@ server = shiny::shinyServer(function(input, output, session) {
   
   
   ##########################################################################################
+  #                                 QTL search
+  ##########################################################################################
+  
+  qtlByRange <- function(database, chromStart, posStart, posEnd){
+    webpage <- "https://www.animalgenome.org/cgi-bin/QTLdb/" %>%
+      {paste0(., database, "/srchloc?chrom=", chromStart, "&qrange=", posStart, "-", posEnd, "&submit=GO")} %>%
+      getURL(.)
+    tc <- textConnection(webpage)
+    webpage <- readLines(tc)
+    close(tc)
+    
+    thisTable <- webpage[which(map_lgl(webpage, ~grepl("a href=\"/tmp/QTLdata_", .x, fixed = T)))] %>%
+      str_extract(., "/tmp/QTLdata_.+.csv") %>%
+      paste0("https://www.animalgenome.org", ., collapse = "") %>%
+      read_csv(., col_names = c("DataType",	"Abbreviation",	"QTLID",	"Trait", "Name",	"Chromosome:cM",	"Chromosome:bp",	"Breed",	"SNPs",	"Trait", "Class>>Tytpe>>Trait|Ontology",	"Genes")) %>%
+      mutate(QTLID = paste0(
+        "<a href='",
+        "https://www.animalgenome.org/cgi-bin/QTLdb/BT/qdetails?QTL_ID=",
+        parse_number(QTLID),
+        "&submit=go'target='_blank'>",
+        QTLID,
+        "</a>"
+      ))
+    
+    return(thisTable)
+    
+  }
+  
+  output$qtl_search_Data <- downloadHandler(
+    filename = function() {
+      paste("qtl", "_example", ".zip", sep="")
+    },
+    content = function(file) {
+      file.copy(paste0(volumes["Example"],"/manhattan_example.zip"), file)
+    })
+  
+  observeEvent(c(input$qtl_database, input$man_file, input$man_map_file), ignoreNULL = F, {
+    qtlSearchData = input$man_file$datapath
+    if(is.null(qtlSearchData)){qtlSearchData <- paste0(volumes["Example"],"/Manhattan_sample.csv")}
+    qtlSearchMapData = input$man_map_file$datapath
+    if(is.null(qtlSearchMapData)){qtlSearchMapData <- paste0(volumes["Example"],"/map_data.csv")}
+    
+    qtlSearchData <- read.csv(qtlSearchData, header = input$man_header)
+    qtlSearchMapData <- read.csv(qtlSearchMapData, header = input$man_header)
+    
+    updateSelectInput(session, "qtl_search_start_col", choices = names(qtlSearchData), selected = names(qtlSearchData)[1])
+    updateSelectInput(session, "qtl_search_end_col", choices = names(qtlSearchData), selected = names(qtlSearchData)[2])
+  })
+  
+  observeEvent(c(input$qtl_database, input$man_file, input$man_map_file, input$qtl_search_start_col, input$qtl_search_end_col),  ignoreNULL = F, {
+    qtlSearchData = input$man_file$datapath
+    if(is.null(qtlSearchData)){qtlSearchData <- paste0(volumes["Example"],"/Manhattan_sample.csv")}
+    qtlSearchMapData = input$man_map_file$datapath
+    if(is.null(qtlSearchMapData)){qtlSearchMapData <- paste0(volumes["Example"],"/map_data.csv")}
+    
+    qtlSearchData <- read.csv(qtlSearchData, header = input$man_header)
+    qtlSearchMapData <- read.csv(qtlSearchMapData, header = input$man_header)
+    ranges <- qtlSearchData %>% left_join(qtlSearchMapData, by = setNames("marker", input$qtl_search_start_col)) %>%
+      left_join(qtlSearchMapData, by = setNames("marker", input$qtl_search_end_col), suffix = c("Start", "End")) %>%
+      mutate(ranges = paste(chromStart, posStart, posEnd, sep = ".")) %>%
+      arrange(desc(WPPA))
+    
+    updateSelectInput(session, "qtl_search_range", choices = ranges$ranges, selected = ranges$ranges[1])
+  })
+  
+  output$qtl_search_table <- DT::renderDataTable({
+    validate(need(!is.na(input$qtl_search_range), ""))
+    searchTable <- map_df(input$qtl_search_range, function(x){
+      range <- strsplit(x, ".", fixed = T)[[1]]
+      return(qtlByRange(input$qtl_database, range[1], range[2], range[3]))
+    }) %>%
+      bind_rows()
+    DT::datatable(searchTable, rownames = F, options = list(scrollX = T, scrollY = "500px"), escape = F)
+  })
+  
+  
+  ##########################################################################################
   #                                 Converge Diagnosis
   ##########################################################################################  
   output$converge_Data <- downloadHandler(
@@ -1174,7 +1251,5 @@ server = shiny::shinyServer(function(input, output, session) {
     
     
   })
-  
-  
   
 })

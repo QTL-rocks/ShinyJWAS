@@ -7,8 +7,5 @@
 #library(ggplot2)
 #library(coda)
 
-
-
 # Run the app ----
 shinyApp(ui = ui, server = server)
-

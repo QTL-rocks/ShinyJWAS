@@ -10,6 +10,7 @@ library(markdown)
 library(manhattanly)
 
 library(shinythemes)
+library(tidyverse)
 library(dplyr)
 library(grid)
 library(plotly)
@@ -21,6 +22,8 @@ library(visPedigree)
 library(rintrojs)
 
 library(sjmisc)
+
+require(RCurl)
 
 
 ui<-fluidPage(
@@ -60,7 +63,6 @@ shinydashboard::dashboardPage(
                                tabName = "manhattan_plot",
                                icon = shiny::icon("dna")
       ),
-      
       shinydashboard::menuItem("Convergence Diagnosis",
                                tabName = "convergence_diagnosis",
                                icon = shiny::icon("random")
@@ -566,7 +568,60 @@ shinydashboard::dashboardPage(
                                     )
                                   )
                                 )
-                              )),
+                                
+                            
+                                
+                                
+                                
+                              ),
+                              
+                              # QTL search
+                              shiny::fluidRow(
+                                shiny::column(
+                                  width = 4,
+                                  
+                                  shiny::conditionalPanel(
+                                    condition = "true",
+                                    shinydashboard::box(
+                                      title = "Plot Parameter Setting",
+                                      status = "primary",
+                                      solidHeader = TRUE,
+                                      collapsible = TRUE,
+                                      width = NULL,
+                                      h5(selectInput("qtl_database", "Select QTL database", choices = list(
+                                        "Cattle" = "BT",
+                                        "Chicken" = "GG",
+                                        "Goat" = "CH",
+                                        "Horse" = "EC",
+                                        "Pig" = "SS",
+                                        "Rainbow Trout" = "OM",
+                                        "Sheep" = "OA"
+                                      ))),
+                                      h5(selectInput("qtl_search_start_col", "Select column for QTL start", choices = "wStart")),
+                                      h5(selectInput("qtl_search_end_col", "Select column for QTL end", choices = "wEnd")),
+                                      h5(selectInput("qtl_search_range", "Select QTL range", choices = "", multiple = T))
+                                      
+                                    )
+                                  )
+                                ),
+                                shiny::column(
+                                  width = 8,
+                                  shinydashboard::box(
+                                    title = "QTL",
+                                    status = "primary",
+                                    solidHeader = TRUE,
+                                    collapsible = TRUE,
+                                    width = NULL,
+                                    height = NULL,
+                                    DT::dataTableOutput('qtl_search_table')
+                                  )
+                                  
+                                  
+                                )
+                                
+                              ) 
+                              
+                              ),
       
       ############################  Converge Diagnosis  ############################ 
       
