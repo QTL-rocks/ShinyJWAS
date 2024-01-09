@@ -8,6 +8,7 @@ library(ggplot2)
 library(coda)
 library(markdown)
 library(manhattanly)
+require(magrittr)
 
 library(shinythemes)
 library(tidyverse)
