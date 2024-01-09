@@ -935,9 +935,9 @@ server = shiny::shinyServer(function(input, output, session) {
       data$CHR = data$chr
       data$BP  = data$pos
       data$P  = data[[input$man_p_value]]
-      
+
       manhattanly(data,suggestiveline = input$WPPA_threshold,
-                  genomewideline = FALSE,logp = FALSE,GENE = "wStart",
+                  genomewideline = FALSE,logp = FALSE,
                   title = input$man_title, xlab = "chromosome",ylab = "WPPA"
       )
     })
@@ -983,7 +983,7 @@ server = shiny::shinyServer(function(input, output, session) {
       data$P  = data[[input$man_p_value]]
       
       manhattanly(data,suggestiveline = input$WPPA_threshold,
-                  genomewideline = FALSE,logp = FALSE,GENE = "wStart",
+                  genomewideline = FALSE,logp = FALSE,
                   title = input$man_title, xlab = "chromosome",ylab = input$man_ylab
       )
     })
@@ -1045,7 +1045,8 @@ server = shiny::shinyServer(function(input, output, session) {
     qtlSearchMapData = input$man_map_file$datapath
     if(is.null(qtlSearchMapData)){qtlSearchMapData <- paste0(volumes["Example"],"/map_data.csv")}
     
-    qtlSearchData <- read.csv(qtlSearchData, header = input$man_header)
+    qtlSearchData <- read.csv(qtlSearchData, header = input$man_header) %>%
+      mutate(wStart = gsub("\"", "", wStart), wEnd = gsub("\"", "", wStart))
     qtlSearchMapData <- read.csv(qtlSearchMapData, header = input$man_header)
     
     updateSelectInput(session, "qtl_search_start_col", choices = names(qtlSearchData), selected = names(qtlSearchData)[1])
@@ -1058,11 +1059,12 @@ server = shiny::shinyServer(function(input, output, session) {
     qtlSearchMapData = input$man_map_file$datapath
     if(is.null(qtlSearchMapData)){qtlSearchMapData <- paste0(volumes["Example"],"/map_data.csv")}
     
-    qtlSearchData <- read.csv(qtlSearchData, header = input$man_header)
+    qtlSearchData <- read.csv(qtlSearchData, header = input$man_header) %>%
+      mutate(wStart = gsub("\"", "", wStart), wEnd = gsub("\"", "", wStart))
     qtlSearchMapData <- read.csv(qtlSearchMapData, header = input$man_header)
     ranges <- qtlSearchData %>% left_join(qtlSearchMapData, by = setNames("marker", input$qtl_search_start_col)) %>%
       left_join(qtlSearchMapData, by = setNames("marker", input$qtl_search_end_col), suffix = c("Start", "End")) %>%
-      mutate(ranges = paste(chromStart, posStart, posEnd, sep = ".")) %>%
+      mutate(ranges = paste(chromStart, ":", posStart, "-", posEnd, sep = "")) %>%
       arrange(desc(WPPA))
     
     updateSelectInput(session, "qtl_search_range", choices = ranges$ranges, selected = ranges$ranges[1])
@@ -1070,11 +1072,13 @@ server = shiny::shinyServer(function(input, output, session) {
   
   output$qtl_search_table <- DT::renderDataTable({
     validate(need(!is.na(input$qtl_search_range), ""))
-    searchTable <- map_df(input$qtl_search_range, function(x){
-      range <- strsplit(x, ".", fixed = T)[[1]]
+    searchTable <- map(input$qtl_search_range, function(x){
+      range <- strsplit(x, c(":", "-"), fixed = T)[[1]]
       return(qtlByRange(input$qtl_database, range[1], range[2], range[3]))
-    }) %>%
-      bind_rows()
+    })
+    searchTable %<>% 
+      bind_rows() %>%
+      rename("Trait", contains("Trait"))
     DT::datatable(searchTable, rownames = F, options = list(scrollX = T, scrollY = "500px"), escape = F)
   })
   
